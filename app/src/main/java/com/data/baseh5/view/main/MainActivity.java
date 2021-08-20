@@ -16,11 +16,12 @@ import com.data.baseh5.R;
 import com.data.baseh5.base.BaseAppCompatActivity;
 import com.data.baseh5.config.Constant;
 import com.data.baseh5.jsbridge.MyJsBridge;
+import com.data.baseh5.util.ActivityController;
 import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
-import com.kongzue.dialog.util.TextInfo;
-import com.kongzue.dialog.v3.MessageDialog;
+import com.kongzue.dialogx.dialogs.MessageDialog;
+import com.kongzue.dialogx.util.TextInfo;
 import com.tencent.smtt.export.external.extension.interfaces.IX5WebSettingsExtension;
 import com.tencent.smtt.export.external.extension.interfaces.IX5WebViewExtension;
 import com.tencent.smtt.sdk.QbSdk;
@@ -38,11 +39,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 主活动
+ *
  * @author jidaojiuyou
+ * @date 2021-08-20
+ * @since 2021-04-28
  */
 public class MainActivity extends BaseAppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = MainActivity.class.getSimpleName();
     private WebView webView;
     private Context context;
     /**
@@ -144,16 +149,17 @@ public class MainActivity extends BaseAppCompatActivity {
     @Override
     public void onBackPressed() {
         MessageDialog
-                .build(this)
+                .build()
+                .setTitle(getString(R.string.tips))
                 .setCancelable(true)
                 .setMessageTextInfo(new TextInfo().setGravity(Gravity.CENTER))
                 .setMessage(getString(R.string.will_quit))
                 .setOkButton(getString(R.string.ok), (baseDialog, v) -> {
-                    finish();
+                    ActivityController.finishAll();
                     return false;
                 })
                 .setCancelButton(getString(R.string.cancel))
-                .show();
+                .show(MainActivity.this);
     }
 
     @Override
