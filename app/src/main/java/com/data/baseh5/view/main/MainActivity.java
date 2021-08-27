@@ -139,7 +139,8 @@ public class MainActivity extends BaseAppCompatActivity {
      */
     @Override
     protected void onDestroy() {
-        QbSdk.clearAllWebViewCache(context, true);
+        /// 清除缓存操作
+        // QbSdk.clearAllWebViewCache(context, true);
         super.onDestroy();
     }
 
